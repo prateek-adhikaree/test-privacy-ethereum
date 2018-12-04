@@ -1,5 +1,4 @@
-pragma solidity ^0.4.24;
-
+pragma solidity ^0.5.0;
 
 contract TestPrivacy {
   //storage
@@ -41,15 +40,15 @@ contract TestPrivacy {
   // show hiddenValue
   function showHiddenValue()
   public
-  constant
+  view
   isAllowedUser
-  returns (string _hiddenValue)
+  returns (string memory _hiddenValue)
   {
       return hiddenValue;
   }
 
   // change hiddenValue
-  function changeHiddenValue(string newValue)
+  function changeHiddenValue(string memory newValue)
   public
   onlyOwner
   {
@@ -57,10 +56,7 @@ contract TestPrivacy {
   }
   
   //check is user in allowed list
-  function isUserInAllowedList()
-  public
-  constant
-  returns (bool isUserAllowed)
+  function isUserInAllowedList() public view returns (bool isUserAllowed)
   {
       return allowedUsers[msg.sender];
   }
