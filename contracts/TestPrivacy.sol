@@ -1,6 +1,5 @@
-pragma solidity ^0.5.0;
-
-contract TestPrivacy {
+pragma solidity ^0.4.24;
+ contract TestPrivacy {
   //storage
   address public owner;
   mapping(address => bool) allowedUsers;
@@ -18,11 +17,9 @@ contract TestPrivacy {
       require(true == allowedUsers[msg.sender]);
       _;
   }
-
-  //Events
+   //Events
   event newUserAdded(address indexed newUser);
-
-  constructor() public {
+   constructor() public {
       owner = msg.sender;
       hiddenValue = "first action";
       allowedUsers[msg.sender] = true;
@@ -40,15 +37,14 @@ contract TestPrivacy {
   // show hiddenValue
   function showHiddenValue()
   public
-  view
+  constant
   isAllowedUser
-  returns (string memory _hiddenValue)
+  returns (string _hiddenValue)
   {
       return hiddenValue;
   }
-
-  // change hiddenValue
-  function changeHiddenValue(string memory newValue)
+   // change hiddenValue
+  function changeHiddenValue(string newValue)
   public
   onlyOwner
   {
@@ -56,8 +52,11 @@ contract TestPrivacy {
   }
   
   //check is user in allowed list
-  function isUserInAllowedList() public view returns (bool isUserAllowed)
+  function isUserInAllowedList()
+  public
+  constant
+  returns (bool isUserAllowed)
   {
       return allowedUsers[msg.sender];
   }
-}
+} 
